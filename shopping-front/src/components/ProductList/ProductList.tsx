@@ -1,5 +1,5 @@
 import React from "react";
-import { GroceryItem } from "../types/global.types";
+import { GroceryItem } from "../../types/global.types";
 import ProductCard from "../ProductCard/ProductCard";
 
 interface ProductListProps {
