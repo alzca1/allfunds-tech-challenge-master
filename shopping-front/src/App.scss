@@ -1,14 +1,41 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@use "./styles/variables" as variables;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+.app {
+  display: grid;
+  grid-template-areas: "product-list cart";
+  height: 100vh;
+  padding: 1rem;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  @media (max-width: variables.$breakpoint-mobile) {
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: variables.$breakpoint-tablet) {
+    grid-template-columns: 3fr 1fr;
+  }
+
+  .product-list {
+    grid-area: "product-list";
+    display: grid;
+
+    @media (max-width: variables.$breakpoint-tablet) {
+      grid-template-columns: repeat(2, 1fr);
+      margin: 0 auto;
+      gap: 1rem;
+    }
+
+    @media (min-width: variables.$breakpoint-tablet) {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      padding: 1rem;
+    }
+  }
+
+  .cart {
+    grid-area: "cart";
+
+    @media (max-width: variables.$breakpoint-tablet) {
+      display: none;
+    }
+  }
 }
