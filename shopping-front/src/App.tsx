@@ -1,10 +1,21 @@
 import { GroceryItem } from "./types/global.types";
 import ProductList from "./components/ProductList/ProductList";
-import CartItem from "./components/CartItem/CartItem";
+import { useState } from "react";
+import { useViewPort } from "./hooks/useViewport";
+import Cart from "./components/Cart/Cart";
 
 function App() {
+  const isMobile: boolean = useViewPort();
+
   const handleAddItemToCart = (itemDetails: GroceryItem): void => {
     console.log(itemDetails);
+  };
+
+  const [isCheckoutVisible, setIsCheckoutVisible] = useState<boolean>(false);
+  const [cartItems, setCartItems] = useState([]);
+
+  const handleToggleCart = (): void => {
+    setIsCheckoutVisible((prevState) => !prevState);
   };
 
   const products = [
@@ -142,12 +153,26 @@ function App() {
 
   return (
     <div className="app">
-      <ProductList products={products} handleAddItemToCart={handleAddItemToCart} />
-      <div className="cart">
-        <h3>Checkout</h3>
-        <CartItem />
-        <h5></h5>
-      </div>
+      {isMobile ? (
+        <div className="mobile">
+          <ProductList products={products} handleAddItemToCart={handleAddItemToCart} />
+          <div
+            className={`${isCheckoutVisible ? "mobile-cart visible" : "mobile-cart not-visible"}`}
+          >
+            <Cart handleToggleCart={handleToggleCart} cartItems={cartItems} />
+          </div>
+          {isCheckoutVisible ? null : (
+            <div className="mobile-floating-button-container">
+              <button onClick={handleToggleCart}> Go to Checkout</button>
+            </div>
+          )}
+        </div>
+      ) : (
+        <div className="desktop">
+          <ProductList products={products} handleAddItemToCart={handleAddItemToCart} />
+          <Cart cartItems={cartItems} />
+        </div>
+      )}
     </div>
   );
 }
