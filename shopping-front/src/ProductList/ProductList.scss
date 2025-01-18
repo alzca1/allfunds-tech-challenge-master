@@ -1,0 +1,18 @@
+@use "../styles/variables" as variables;
+
+.product-list {
+    grid-area: "product-list";
+    display: grid;
+
+    @media (max-width: variables.$breakpoint-tablet) {
+        grid-template-columns: repeat(2, 1fr);
+        margin: 0 auto;
+        gap: 1rem;
+    }
+
+    @media (min-width: variables.$breakpoint-tablet) {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
+        padding: 1rem;
+    }
+}
