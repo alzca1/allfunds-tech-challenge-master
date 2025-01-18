@@ -1,5 +1,6 @@
 import { GroceryItem } from "./types/global.types";
 import ProductList from "./components/ProductList/ProductList";
+import CartItem from "./components/CartItem/CartItem";
 
 function App() {
   const handleAddItemToCart = (itemDetails: GroceryItem): void => {
@@ -144,6 +145,8 @@ function App() {
       <ProductList products={products} handleAddItemToCart={handleAddItemToCart} />
       <div className="cart">
         <h3>Checkout</h3>
+        <CartItem />
+        <h5></h5>
       </div>
     </div>
   );
