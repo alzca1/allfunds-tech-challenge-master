@@ -1,5 +1,7 @@
 @use "../App.scss";
-@use "../ProductCard/ProductCard.scss";
+@use "../components/ProductCard/ProductCard.scss";
+@use "../components/ProductList/ProductList.scss";
+@use "../components/CartItem/CartItem.scss";
 
 *,
 *::before,

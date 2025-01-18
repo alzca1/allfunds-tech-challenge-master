@@ -1,5 +1,5 @@
 import React from "react";
-import { GroceryItem } from "../types/global.types";
+import { GroceryItem } from "../../types/global.types";
 
 interface ProductCardProps {
   itemDetails: GroceryItem;
@@ -7,7 +7,7 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ itemDetails, handleAddItemToCart }: ProductCardProps) {
-  const { id, image_url, stock, productName, price, productDescription } = itemDetails;
+  const { image_url, stock, productName, price, productDescription } = itemDetails;
   return (
     <div className="product-card">
       <div className="img-container">

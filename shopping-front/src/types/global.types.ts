@@ -5,5 +5,5 @@ export interface GroceryItem {
   productName: string;
   price: number;
   productDescription: string;
-  favorite: string;
+  favorite: string | number;
 }
