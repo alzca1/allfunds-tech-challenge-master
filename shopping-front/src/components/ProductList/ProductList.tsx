@@ -1,10 +1,10 @@
 import React from "react";
-import { GroceryItem } from "../../types/global.types";
+import { Product } from "../../types/global.types";
 import ProductCard from "../ProductCard/ProductCard";
 
 interface ProductListProps {
-  products: GroceryItem[];
-  handleAddItemToCart: (itemDetails: GroceryItem) => void;
+  products: Product[];
+  handleAddItemToCart: (itemDetails: Product) => void;
 }
 
 export default function ProductList({ products, handleAddItemToCart }: ProductListProps) {
@@ -19,7 +19,7 @@ export default function ProductList({ products, handleAddItemToCart }: ProductLi
   if (products?.length > 0) {
     return (
       <div className="product-list">
-        {products.map((product: GroceryItem) => (
+        {products.map((product: Product) => (
           <ProductCard
             key={product?.id}
             itemDetails={product}

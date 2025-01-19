@@ -1,4 +1,4 @@
-export interface GroceryItem {
+export interface Product {
   id: string;
   image_url: string;
   stock: number;
@@ -11,4 +11,10 @@ export interface GroceryItem {
 export interface CartItem {
   quantity: number;
   price: number;
+}
+
+export interface ProductDetailState {
+  isLoading: boolean;
+  data: Product[];
+  error: Error | null;
 }

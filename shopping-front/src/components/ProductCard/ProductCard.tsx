@@ -1,10 +1,10 @@
 import React from "react";
-import { GroceryItem } from "../../types/global.types";
+import { Product } from "../../types/global.types";
 import { truncateText } from "../../helpers/helpers";
 
 interface ProductCardProps {
-  itemDetails: GroceryItem;
-  handleAddItemToCart: (itemDetails: GroceryItem) => void;
+  itemDetails: Product;
+  handleAddItemToCart: (itemDetails: Product) => void;
 }
 
 export default function ProductCard({ itemDetails, handleAddItemToCart }: ProductCardProps) {
