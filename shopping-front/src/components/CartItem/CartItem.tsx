@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { CartItem as CartItemInterface, UpdateProductOperation } from "../../types/global.types";
+import { CartItem as CartItemInterface } from "../../types/global.types";
 
 interface CartItemProps {
   itemDetails: CartItemInterface;
@@ -19,17 +19,11 @@ export default function CartItem({
   }, [itemDetails]);
 
   const addItem = () => {
-    // if (itemQuantity < 99) {
-    //   return;
-    // }
     setItemUpdating(true);
     handleAddItem(itemDetails?.id);
   };
 
   const subtractItem = () => {
-    // if (itemQuantity > 0) {
-    //   setItemQuantity((prevState) => prevState - 1);
-    // }
     setItemUpdating(true);
     handleSubtractItem(itemDetails?.id);
   };

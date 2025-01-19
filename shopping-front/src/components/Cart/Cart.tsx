@@ -1,10 +1,6 @@
 import React from "react";
 import CartItem from "../CartItem/CartItem";
-import {
-  CartItem as CartItemInterface,
-  Product,
-  UpdateProductOperation,
-} from "../../types/global.types";
+import { CartItem as CartItemInterface, UpdateProductOperation } from "../../types/global.types";
 import CartTotal from "../CartTotal/CartTotal";
 
 interface CartProps {
