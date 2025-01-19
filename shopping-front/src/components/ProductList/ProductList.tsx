@@ -1,22 +1,66 @@
 import React from "react";
-import { Product, UpdateProductOperation } from "../../types/global.types";
+import { CartItem, Product, UpdateProductOperation } from "../../types/global.types";
 import ProductCard from "../ProductCard/ProductCard";
 
 interface ProductListProps {
-  products: Product[];
   isLoading: boolean;
-  handleAddItemToCart: (
-    itemDetails: Product,
+  products: Product[];
+  handleUpdateCart: (cartItems: CartItem[]) => void;
+  updateProductStock: (
+    id: number | string,
     operation: UpdateProductOperation,
     amount: number
-  ) => Promise<void>;
+  ) => Promise<boolean>;
+  cartItems: CartItem[];
 }
 
 export default function ProductList({
-  products,
   isLoading,
-  handleAddItemToCart,
+  products,
+  handleUpdateCart,
+  updateProductStock,
+  cartItems,
 }: ProductListProps) {
+  const handleAddItemToCart = async (
+    itemDetails: Product,
+    operation: UpdateProductOperation,
+    amount: number
+  ): Promise<void> => {
+    const update = await updateProductStock(itemDetails?.id, operation, amount);
+    const hasCartItem = cartItems.some((cartItem: CartItem) => cartItem?.id === itemDetails?.id);
+    const cartItemsCopy: CartItem[] = structuredClone(cartItems);
+
+    if (update && !hasCartItem) {
+      const item: CartItem = {
+        id: itemDetails?.id,
+        image_url: itemDetails?.image_url,
+        productName: itemDetails?.productName,
+        quantity: 1,
+        price: itemDetails?.price,
+      };
+
+      cartItemsCopy.push(item);
+      handleUpdateCart(cartItemsCopy);
+      return;
+    }
+
+    if (update && hasCartItem) {
+      const updatedCartItems: CartItem[] = cartItemsCopy?.map((cartItem: CartItem) => {
+        if (cartItem?.id === itemDetails?.id) {
+          const currentQuantity = cartItem?.quantity;
+          return {
+            ...cartItem,
+            quantity: currentQuantity + 1,
+          };
+        }
+        return cartItem;
+      });
+
+      handleUpdateCart(updatedCartItems);
+      return;
+    }
+  };
+
   if (isLoading) {
     return (
       <div>
