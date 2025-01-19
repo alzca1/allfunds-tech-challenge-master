@@ -1,22 +1,32 @@
-import { GroceryItem } from "./types/global.types";
+import { Product } from "./types/global.types";
 import ProductList from "./components/ProductList/ProductList";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useViewPort } from "./hooks/useViewport";
 import Cart from "./components/Cart/Cart";
+import { useProducts } from "./hooks/useProducts";
 
 function App() {
   const isMobile: boolean = useViewPort();
 
-  const handleAddItemToCart = (itemDetails: GroceryItem): void => {
-    console.log(itemDetails);
-  };
-
   const [isCheckoutVisible, setIsCheckoutVisible] = useState<boolean>(false);
   const [cartItems, setCartItems] = useState([]);
 
+  const { getProducts } = useProducts();
+
+  const handleAddItemToCart = (itemDetails: Product): void => {
+    console.log(itemDetails);
+  };
   const handleToggleCart = (): void => {
     setIsCheckoutVisible((prevState) => !prevState);
   };
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      await getProducts();
+    };
+
+    fetchProducts();
+  }, []);
 
   const products = [
     {
