@@ -7,12 +7,12 @@
     @media (max-width: variables.$breakpoint-tablet) {
         grid-template-columns: repeat(2, 1fr);
         margin: 0 auto;
-        gap: 1rem;
+        gap: 24px;
     }
 
     @media (min-width: variables.$breakpoint-tablet) {
         grid-template-columns: repeat(4, 1fr);
-        gap: 1rem;
-        padding: 1rem;
+        gap: 32px;
+        padding: 8px;
     }
 }

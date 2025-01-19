@@ -4,12 +4,11 @@
   // display: grid;
   // grid-template-areas: "product-list cart";
   height: 100vh;
-  padding: 1rem;
-
+  padding: 16px;
   .desktop {
     display: grid;
     grid-template-areas: "product-list cart";
-    grid-template-columns: 4fr 1fr;
+    grid-template-columns: 7fr 2fr;
   }
 
   .mobile {
