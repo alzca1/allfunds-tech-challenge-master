@@ -3,6 +3,8 @@
 .product-list {
     grid-area: "product-list";
     display: grid;
+    height: 100vh;
+    overflow-y: scroll;
 
     @media (max-width: variables.$breakpoint-tablet) {
         grid-template-columns: repeat(2, 1fr);

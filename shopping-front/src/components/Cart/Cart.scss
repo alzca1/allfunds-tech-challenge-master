@@ -2,8 +2,9 @@
 
 .cart {
     position: relative;
-    border: 1px solid blue;
+    border: 1px solid grey;
     height: 100vh;
+    overflow-y: scroll;
     @media (max-width: variables.$breakpoint-tablet) {
         .cart-header-container {
             display: flex;
