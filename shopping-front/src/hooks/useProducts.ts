@@ -44,7 +44,7 @@ export function useProducts() {
     }
   };
 
-  const getProduct = async (productId: number): Promise<Product | null> => {
+  const getProduct = async (productId: number | string): Promise<Product | null> => {
     try {
       const response: AxiosResponse<Product> = await axios.get(
         `${apiRoutes.getProduct}/${productId}`
@@ -62,7 +62,7 @@ export function useProducts() {
   };
 
   const updateProductStock = async (
-    id: number,
+    id: number | string,
     operation: UpdateProductOperation,
     amount: number
   ): Promise<boolean> => {
@@ -92,6 +92,23 @@ export function useProducts() {
       });
 
       if (response.status === 200) {
+        // actualización optimista del estado donde almacenamos los objetos
+        const productDetailsCopy = structuredClone(productDetails.data);
+        const updatedProductDetails = productDetailsCopy.map((product) => {
+          if (product?.id == id) {
+            return {
+              ...product,
+              stock: newStock,
+            };
+          }
+          return product;
+        });
+
+        setProductDetails((prevState) => ({
+          ...prevState,
+          data: updatedProductDetails,
+        }));
+
         return true;
       }
       return false;
