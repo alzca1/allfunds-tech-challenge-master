@@ -1,32 +1,38 @@
-import React, { useState } from "react";
-import { CartItem as CartItemInterface } from "../../types/global.types";
+import React, { useEffect, useState } from "react";
+import { CartItem as CartItemInterface, UpdateProductOperation } from "../../types/global.types";
 
 interface CartItemProps {
   itemDetails: CartItemInterface;
+  handleAddItem: (id: string) => Promise<void>;
+  handleSubtractItem: (id: string) => Promise<void>;
 }
 
-export default function CartItem({ itemDetails }: CartItemProps) {
-  const [itemQuantity, setItemQuantity] = useState(1);
+export default function CartItem({
+  itemDetails,
+  handleAddItem,
+  handleSubtractItem,
+}: CartItemProps) {
+  const [itemUpdating, setItemUpdating] = useState(false);
 
-  // ** Consideraciones **
-  // TODO: Cuando el item llegue a 0, debemos eliminar el item de la cesta de la compra
-  // TODO: Si restamos items de un producto, el número de artículos disponible de ese item
-  // en el listado general de artículos debe actualizarse.
-  // TODO: el incremento o decremento de artículos debe reflejarse en el componente Checkout.
+  useEffect(() => {
+    setItemUpdating(false);
+  }, [itemDetails]);
 
-  const handleAddItem = () => {
-    if (itemQuantity < 99) {
-      setItemQuantity((prevState) => prevState + 1);
-    }
+  const addItem = () => {
+    // if (itemQuantity < 99) {
+    //   return;
+    // }
+    setItemUpdating(true);
+    handleAddItem(itemDetails?.id);
   };
 
-  const handleSubtractItem = () => {
-    if (itemQuantity > 0) {
-      setItemQuantity((prevState) => prevState - 1);
-    }
-    
+  const subtractItem = () => {
+    // if (itemQuantity > 0) {
+    //   setItemQuantity((prevState) => prevState - 1);
+    // }
+    setItemUpdating(true);
+    handleSubtractItem(itemDetails?.id);
   };
-
 
   return (
     <div className="cart-item">
@@ -34,9 +40,13 @@ export default function CartItem({ itemDetails }: CartItemProps) {
       <div className="action-container">
         <span>{itemDetails?.productName}</span>
         <div className="item-quantity-container">
-          <button onClick={handleSubtractItem}>-</button>
-          <span>{itemQuantity}</span>
-          <button onClick={handleAddItem}>+</button>
+          <button disabled={itemUpdating} onClick={subtractItem}>
+            -
+          </button>
+          <span>{itemDetails?.quantity}</span>
+          <button disabled={itemUpdating} onClick={addItem}>
+            +
+          </button>
         </div>
       </div>
       <div className="price-container">

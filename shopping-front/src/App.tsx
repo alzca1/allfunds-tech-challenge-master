@@ -25,6 +25,10 @@ function App() {
     setIsCheckoutVisible((prevState) => !prevState);
   };
 
+  const handleUpdateCart = (cartItems: CartItem[]) => {
+    setCartItems(cartItems);
+  };
+
   const handleAddItemToCart = async (
     itemDetails: Product,
     operation: UpdateProductOperation,
@@ -51,13 +55,45 @@ function App() {
     if (update && hasCartItem) {
       const updatedCartItems: CartItem[] = cartItemsCopy?.map((cartItem: CartItem) => {
         if (cartItem?.id === itemDetails?.id) {
+          const currentQuantity = cartItem?.quantity;
           return {
             ...cartItem,
-            quantity: (cartItem.quantity += 1),
+            quantity: currentQuantity + 1,
           };
         }
         return cartItem;
       });
+
+      setCartItems(updatedCartItems);
+      return;
+    }
+  };
+
+  const handleSubtractItemFromCart = async (id: string): Promise<void> => {
+    const update = await updateProductStock(id, UpdateProductOperation.SUBTRACT, 1);
+    const hasItemQuantityLeft = cartItems.some(
+      (cartItem: CartItem) => cartItem?.id == id && cartItem?.quantity - 1 > 0
+    );
+    const cartItemsCopy: CartItem[] = structuredClone(cartItems);
+
+    if (update && hasItemQuantityLeft) {
+      const updatedCartItems: CartItem[] = cartItemsCopy?.map((cartItem: CartItem) => {
+        if (cartItem?.id === id) {
+          const currentQuantity = cartItem?.quantity;
+          return {
+            ...cartItem,
+            quantity: currentQuantity - 1,
+          };
+        }
+        return cartItem;
+      });
+      setCartItems(updatedCartItems);
+      return;
+    }
+    if (update && !hasItemQuantityLeft) {
+      const updatedCartItems: CartItem[] = cartItemsCopy?.filter(
+        (cartItem: CartItem) => cartItem?.id !== id
+      );
 
       setCartItems(updatedCartItems);
       return;
@@ -76,7 +112,12 @@ function App() {
           <div
             className={`${isCheckoutVisible ? "mobile-cart visible" : "mobile-cart not-visible"}`}
           >
-            <Cart handleToggleCart={handleToggleCart} cartItems={cartItems} />
+            <Cart
+              cartItems={cartItems}
+              handleUpdateCart={handleUpdateCart}
+              updateProductStock={updateProductStock}
+              handleToggleCart={handleToggleCart}
+            />
           </div>
           {isCheckoutVisible ? null : (
             <div className="mobile-floating-button-container">
@@ -91,7 +132,11 @@ function App() {
             isLoading={productDetails?.isLoading}
             handleAddItemToCart={handleAddItemToCart}
           />
-          <Cart cartItems={cartItems} />
+          <Cart
+            cartItems={cartItems}
+            handleUpdateCart={handleUpdateCart}
+            updateProductStock={updateProductStock}
+          />
         </div>
       )}
     </div>
