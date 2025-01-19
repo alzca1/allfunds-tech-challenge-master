@@ -40,7 +40,7 @@ export default function CartItem() {
     <div className="cart-item">
       <img src={itemDetails?.image_url} />
       <div className="action-container">
-        <h4>{itemDetails?.productName}</h4>
+        <span>{itemDetails?.productName}</span>
         <div className="item-quantity-container">
           <button onClick={handleSubtractItem}>-</button>
           <span>{itemQuantity}</span>
