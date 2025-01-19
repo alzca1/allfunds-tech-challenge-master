@@ -39,11 +39,17 @@ export default function CartItem() {
   return (
     <div className="cart-item">
       <img src={itemDetails?.image_url} />
-      <h6>{itemDetails?.productName}</h6>
-      <button onClick={handleSubtractItem}>-</button>
-      <button onClick={handleAddItem}>+</button>
-      {itemQuantity}
-      <span>{itemDetails?.price}</span>
+      <div className="action-container">
+        <h4>{itemDetails?.productName}</h4>
+        <div className="item-quantity-container">
+          <button onClick={handleSubtractItem}>-</button>
+          <span>{itemQuantity}</span>
+          <button onClick={handleAddItem}>+</button>
+        </div>
+      </div>
+      <div className="price-container">
+        <span>{itemDetails?.price}€</span>
+      </div>
     </div>
   );
 }

@@ -1,3 +1,43 @@
-.cart-item{
+@use "../../styles/variables" as variables;
 
+.cart-item {
+    @media (max-width: variables.$breakpoint-tablet) {
+        // display: flex;
+        // justify-content: space-between;
+        display: grid;
+        grid-template-columns: 3.5fr 8fr 1.5fr;
+        max-height: 300px;
+        margin-bottom: 24px;
+
+        img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+        }
+
+        .action-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+            padding: 4px;
+
+            .item-quantity-container {
+                padding: 8px 16px 0 16px;
+                text-align: left;
+                span {
+                    font-size: 1.2rem;
+                    margin: 0 16px;
+                }
+            }
+        }
+
+        .price-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            span {
+                font-size: 1.1rem;
+            }
+        }
+    }
 }
