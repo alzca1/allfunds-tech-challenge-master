@@ -33,21 +33,22 @@
             padding: 4px;
 
             span {
-                font-size: 0.85rem;
+                font-size: 0.75rem;
             }
 
             .item-quantity-container {
-                padding: 4px 8px 0 8px;
+                padding: 4px 4px 0 4px;
                 text-align: left;
 
                 span {
                     font-size: 0.9rem;
-                    margin: 0 16px;
+                    margin: 0 8px;
                 }
 
                 button {
-                    width: 30px;
-                    height: 20px;
+                    width: 20px;
+                    height: 15px;
+                    background-color: inherit;
                 }
             }
         }

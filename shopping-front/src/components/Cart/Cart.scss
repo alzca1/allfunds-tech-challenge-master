@@ -21,6 +21,7 @@
         }
     }
     @media (min-width: variables.$breakpoint-tablet) {
+        padding: 80px 16px;
         .cart-header-container {
             display: none;
         }
