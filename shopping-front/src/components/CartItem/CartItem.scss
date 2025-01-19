@@ -1,8 +1,23 @@
 @use "../../styles/variables" as variables;
 
 .cart-item {
+    display: grid;
+    margin-bottom: 24px;
+
+    .action-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        padding: 4px;
+    }
+
+    .price-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
     @media (min-width: variables.$breakpoint-tablet) {
-        display: grid;
         grid-template-columns: 1fr 2fr 0.5fr;
         max-height: 64px;
         margin-bottom: 24px;
@@ -14,9 +29,6 @@
         }
 
         .action-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: end;
             align-items: center;
             padding: 4px;
 
@@ -41,16 +53,11 @@
         }
 
         .price-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
             span {
                 font-size: 0.85rem;
             }
         }
     }
-
-    // *** aquí empieza el estilo de tablet *** \\
 
     @media (max-width: variables.$breakpoint-tablet) {
         display: grid;
@@ -65,9 +72,6 @@
         }
 
         .action-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: end;
             padding: 4px;
 
             .item-quantity-container {
@@ -81,9 +85,6 @@
         }
 
         .price-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
             span {
                 font-size: 1.1rem;
             }
