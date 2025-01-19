@@ -6,10 +6,10 @@ interface ProductListProps {
   products: Product[];
   isLoading: boolean;
   handleAddItemToCart: (
-    id: number | string,
+    itemDetails: Product,
     operation: UpdateProductOperation,
     amount: number
-  ) => Promise<boolean>;
+  ) => Promise<void>;
 }
 
 export default function ProductList({

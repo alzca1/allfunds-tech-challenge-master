@@ -5,10 +5,10 @@ import { truncateText } from "../../helpers/helpers";
 interface ProductCardProps {
   itemDetails: Product;
   handleAddItemToCart: (
-    id: number | string,
+    itemDetails: Product,
     operation: UpdateProductOperation,
     amount: number
-  ) => Promise<boolean>;
+  ) => Promise<void>;
 }
 
 export default function ProductCard({ itemDetails, handleAddItemToCart }: ProductCardProps) {
@@ -21,7 +21,7 @@ export default function ProductCard({ itemDetails, handleAddItemToCart }: Produc
       return;
     }
     setProductUpdating(true);
-    handleAddItemToCart(itemDetails?.id, UpdateProductOperation.SUBTRACT, 1);
+    handleAddItemToCart(itemDetails, UpdateProductOperation.SUBTRACT, 1);
   };
 
   useEffect(() => {
