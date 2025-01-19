@@ -11,6 +11,11 @@ export function useProducts() {
   });
 
   const getProducts = async () => {
+    setProductDetails({
+      isLoading: true,
+      data: [],
+      error: null,
+    });
     try {
       const response: AxiosResponse<Product[]> = await axios.get(apiRoutes.getProducts);
 
