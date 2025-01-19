@@ -9,6 +9,9 @@ export interface Product {
 }
 
 export interface CartItem {
+  id: string;
+  image_url: string;
+  productName: string;
   quantity: number;
   price: number;
 }
