@@ -7,3 +7,8 @@ export interface GroceryItem {
   productDescription: string;
   favorite: string | number;
 }
+
+export interface CartItem {
+  quantity: number;
+  price: number;
+}
