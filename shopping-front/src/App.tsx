@@ -11,7 +11,7 @@ function App() {
   const [isCheckoutVisible, setIsCheckoutVisible] = useState<boolean>(false);
   const [cartItems, setCartItems] = useState([]);
 
-  const { getProducts } = useProducts();
+  const { getProducts, productDetails } = useProducts();
 
   const handleAddItemToCart = (itemDetails: Product): void => {
     console.log(itemDetails);
@@ -179,7 +179,11 @@ function App() {
         </div>
       ) : (
         <div className="desktop">
-          <ProductList products={products} handleAddItemToCart={handleAddItemToCart} />
+          <ProductList
+            products={productDetails?.data}
+            isLoading={productDetails?.isLoading}
+            handleAddItemToCart={handleAddItemToCart}
+          />
           <Cart cartItems={cartItems} />
         </div>
       )}
