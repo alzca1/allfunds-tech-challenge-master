@@ -1,6 +1,6 @@
 import React from "react";
 import CartItem from "../CartItem/CartItem";
-import { CartItem as CartItemInterface, GroceryItem } from "../../types/global.types";
+import { CartItem as CartItemInterface, Product } from "../../types/global.types";
 import CartTotal from "../CartTotal/CartTotal";
 
 interface CartProps {
