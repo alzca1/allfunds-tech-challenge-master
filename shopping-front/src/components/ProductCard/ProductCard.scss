@@ -2,7 +2,9 @@
 
 .product-card {
     border: 1px solid rgb(237, 221, 221);
-    // height: 30vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
     img {
         width: 100%;
@@ -27,7 +29,7 @@
 
     .product-second-row {
         height: 8vh;
-        padding: 4px;
+        padding: 0 8px;
         // font-size: 0.7rem;
 
         p {
@@ -38,7 +40,7 @@
     }
 
     .product-third-row {
-        padding: 4px;
+        padding: 0 8px;
         button {
             border-radius: 0;
             border: 1px solid black;
@@ -49,6 +51,12 @@
     @media (max-width: variables.$breakpoint-tablet) {
         width: 40vw;
         height: 30vh;
+
+        .product-first-row {
+            span {
+                font-size: 0.7rem;
+            }
+        }
 
         .product-second-row {
             height: 10vh;
@@ -83,12 +91,11 @@
         .product-second-row {
             height: 11vh;
             font-size: 0.83rem;
-            border: 1px solid red;
         }
         .product-third-row {
-            border: 1px solid green;
             display: flex;
             justify-content: space-between;
+            align-items: center;
             font-size: 0.85rem;
 
             button {
