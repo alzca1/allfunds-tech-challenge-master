@@ -1,3 +1,93 @@
-.cart-item{
+@use "../../styles/variables" as variables;
 
+.cart-item {
+    display: grid;
+    margin-bottom: 24px;
+
+    .action-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        padding: 4px;
+    }
+
+    .price-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    @media (min-width: variables.$breakpoint-tablet) {
+        grid-template-columns: 1fr 2fr 0.5fr;
+        max-height: 64px;
+        margin-bottom: 24px;
+
+        img {
+            width: 64px;
+            height: 64px;
+            object-fit: cover;
+        }
+
+        .action-container {
+            align-items: center;
+            padding: 4px;
+
+            span {
+                font-size: 0.85rem;
+            }
+
+            .item-quantity-container {
+                padding: 4px 8px 0 8px;
+                text-align: left;
+
+                span {
+                    font-size: 0.9rem;
+                    margin: 0 16px;
+                }
+
+                button {
+                    width: 30px;
+                    height: 20px;
+                }
+            }
+        }
+
+        .price-container {
+            span {
+                font-size: 0.85rem;
+            }
+        }
+    }
+
+    @media (max-width: variables.$breakpoint-tablet) {
+        display: grid;
+        grid-template-columns: 3.5fr 8fr 1.5fr;
+        max-height: 300px;
+        margin-bottom: 24px;
+
+        img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+        }
+
+        .action-container {
+            padding: 4px;
+
+            .item-quantity-container {
+                padding: 8px 16px 0 16px;
+                text-align: left;
+                span {
+                    font-size: 1.2rem;
+                    margin: 0 16px;
+                }
+            }
+        }
+
+        .price-container {
+            span {
+                font-size: 1.1rem;
+            }
+        }
+    }
 }
