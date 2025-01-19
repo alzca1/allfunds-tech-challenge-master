@@ -1,6 +1,11 @@
 import React, { useState } from "react";
+import { CartItem as CartItemInterface } from "../../types/global.types";
 
-export default function CartItem() {
+interface CartItemProps {
+  itemDetails: CartItemInterface;
+}
+
+export default function CartItem({ itemDetails }: CartItemProps) {
   const [itemQuantity, setItemQuantity] = useState(1);
 
   // ** Consideraciones **
@@ -19,22 +24,9 @@ export default function CartItem() {
     if (itemQuantity > 0) {
       setItemQuantity((prevState) => prevState - 1);
     }
-    // TODO: añadir lógica para incrementar el número de artículos disponibles en este mismo
-    // artículo de la lista general.
-
-    // TODO: si el artículo llega a itemQuantity == 0, debemos eliminar el artículo de la lista de la compra.
+    
   };
 
-  const itemDetails = {
-    id: "41fd4fd9-95c7-4809-96db-a147d352fdbb",
-    image_url: "https://dummyimage.com/400x400/28200e/000&text=Unbranded Metal Chair",
-    stock: 8,
-    productName: "Unbranded Metal Chair",
-    price: 43,
-    productDescription:
-      "Porro tempore autem. Sunt molestias qui quod recusandae nemo quia optio. Nostrum aperiam officiis aut reprehenderit illo.",
-    favorite: "1",
-  };
 
   return (
     <div className="cart-item">

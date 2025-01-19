@@ -1,18 +1,12 @@
 import React from "react";
 import CartItem from "../CartItem/CartItem";
-import { CartItem as CartItemInterface, Product } from "../../types/global.types";
+import { CartItem as CartItemInterface } from "../../types/global.types";
 import CartTotal from "../CartTotal/CartTotal";
 
 interface CartProps {
   handleToggleCart?: () => void;
   cartItems: CartItemInterface[] | [];
 }
-
-const mockCartItems: CartItemInterface[] = [
-  { price: 4.99, quantity: 2 },
-  { price: 7.59, quantity: 1 },
-  { price: 2.99, quantity: 4 },
-];
 
 export default function Cart({ handleToggleCart, cartItems }: CartProps) {
   return (
@@ -24,13 +18,11 @@ export default function Cart({ handleToggleCart, cartItems }: CartProps) {
         <h3>Cart</h3>
       </div>
       <div className="items-container">
-        <CartItem />
-        <CartItem />
-        <CartItem />
-        <CartItem />
-        <CartItem />
+        {cartItems?.map((cartItem) => (
+          <CartItem key={cartItem?.id} itemDetails={cartItem} />
+        ))}
       </div>
-      <CartTotal cartItems={mockCartItems} />
+      <CartTotal cartItems={cartItems} />
     </div>
   );
 }
