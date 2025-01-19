@@ -1,11 +1,18 @@
 import React from "react";
 import CartItem from "../CartItem/CartItem";
-import { GroceryItem } from "../../types/global.types";
+import { CartItem as CartItemInterface, GroceryItem } from "../../types/global.types";
+import CartTotal from "../CartTotal/CartTotal";
 
 interface CartProps {
   handleToggleCart?: () => void;
-  cartItems: GroceryItem[] | [];
+  cartItems: CartItemInterface[] | [];
 }
+
+const mockCartItems: CartItemInterface[] = [
+  { price: 4.99, quantity: 2 },
+  { price: 7.59, quantity: 1 },
+  { price: 2.99, quantity: 4 },
+];
 
 export default function Cart({ handleToggleCart, cartItems }: CartProps) {
   return (
@@ -23,6 +30,7 @@ export default function Cart({ handleToggleCart, cartItems }: CartProps) {
         <CartItem />
         <CartItem />
       </div>
+      <CartTotal cartItems={mockCartItems} />
     </div>
   );
 }

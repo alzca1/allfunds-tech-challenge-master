@@ -13,6 +13,6 @@
     @media (min-width: variables.$breakpoint-tablet) {
         grid-template-columns: repeat(4, 1fr);
         gap: 32px;
-        padding: 8px;
+        padding: 48px 8px 48px 16px;
     }
 }
