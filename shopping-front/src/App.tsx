@@ -1,4 +1,4 @@
-import { Product } from "./types/global.types";
+import { Product, UpdateProductOperation } from "./types/global.types";
 import ProductList from "./components/ProductList/ProductList";
 import { useEffect, useState } from "react";
 import { useViewPort } from "./hooks/useViewport";
@@ -11,11 +11,8 @@ function App() {
   const [isCheckoutVisible, setIsCheckoutVisible] = useState<boolean>(false);
   const [cartItems, setCartItems] = useState([]);
 
-  const { getProducts, productDetails } = useProducts();
+  const { getProducts, productDetails, updateProductStock } = useProducts();
 
-  const handleAddItemToCart = (itemDetails: Product): void => {
-    console.log(itemDetails);
-  };
   const handleToggleCart = (): void => {
     setIsCheckoutVisible((prevState) => !prevState);
   };
@@ -35,7 +32,7 @@ function App() {
           <ProductList
             isLoading={productDetails?.isLoading}
             products={productDetails?.data}
-            handleAddItemToCart={handleAddItemToCart}
+            handleAddItemToCart={updateProductStock}
           />
           <div
             className={`${isCheckoutVisible ? "mobile-cart visible" : "mobile-cart not-visible"}`}
@@ -53,7 +50,7 @@ function App() {
           <ProductList
             products={productDetails?.data}
             isLoading={productDetails?.isLoading}
-            handleAddItemToCart={handleAddItemToCart}
+            handleAddItemToCart={updateProductStock}
           />
           <Cart cartItems={cartItems} />
         </div>

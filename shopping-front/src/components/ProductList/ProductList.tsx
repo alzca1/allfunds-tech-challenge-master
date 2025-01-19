@@ -1,11 +1,15 @@
 import React from "react";
-import { Product, ProductDetailState } from "../../types/global.types";
+import { Product, UpdateProductOperation } from "../../types/global.types";
 import ProductCard from "../ProductCard/ProductCard";
 
 interface ProductListProps {
   products: Product[];
   isLoading: boolean;
-  handleAddItemToCart: (itemDetails: Product) => void;
+  handleAddItemToCart: (
+    id: number | string,
+    operation: UpdateProductOperation,
+    amount: number
+  ) => Promise<boolean>;
 }
 
 export default function ProductList({

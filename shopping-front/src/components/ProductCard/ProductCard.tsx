@@ -1,14 +1,33 @@
-import React from "react";
-import { Product } from "../../types/global.types";
+import React, { useEffect, useState } from "react";
+import { Product, UpdateProductOperation } from "../../types/global.types";
 import { truncateText } from "../../helpers/helpers";
 
 interface ProductCardProps {
   itemDetails: Product;
-  handleAddItemToCart: (itemDetails: Product) => void;
+  handleAddItemToCart: (
+    id: number | string,
+    operation: UpdateProductOperation,
+    amount: number
+  ) => Promise<boolean>;
 }
 
 export default function ProductCard({ itemDetails, handleAddItemToCart }: ProductCardProps) {
   const { image_url, stock, productName, price, productDescription } = itemDetails;
+
+  const [productUpdating, setProductUpdating] = useState(false);
+
+  const addItemToCart = (): void => {
+    if (stock === 0) {
+      return;
+    }
+    setProductUpdating(true);
+    handleAddItemToCart(itemDetails?.id, UpdateProductOperation.SUBTRACT, 1);
+  };
+
+  useEffect(() => {
+    setProductUpdating(false);
+  }, [itemDetails]);
+
   return (
     <div className="product-card">
       <div className="img-container">
@@ -23,7 +42,9 @@ export default function ProductCard({ itemDetails, handleAddItemToCart }: Produc
       </div>
       <div className="product-third-row">
         <span>{stock} left</span>
-        <button onClick={() => handleAddItemToCart(itemDetails)}>+ add</button>
+        <button disabled={productUpdating || stock == 0} onClick={addItemToCart}>
+          {productUpdating ? `updating` : `+add`}
+        </button>
       </div>
     </div>
   );
