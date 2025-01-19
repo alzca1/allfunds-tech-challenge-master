@@ -5,7 +5,7 @@
     border: 1px solid grey;
     height: 100vh;
     overflow-y: scroll;
-    @media (max-width: variables.$breakpoint-tablet) {
+    @media (max-width: variables.$min-breakpoint-tablet) {
         .cart-header-container {
             display: flex;
             position: relative;
@@ -24,7 +24,7 @@
             padding: 16px;
         }
     }
-    @media (min-width: variables.$breakpoint-tablet) {
+    @media (min-width: variables.$min-breakpoint-tablet) {
         padding: 80px 16px;
         .cart-header-container {
             display: none;

@@ -17,7 +17,7 @@
         align-items: center;
     }
 
-    @media (min-width: variables.$breakpoint-tablet) {
+    @media (min-width: variables.$min-breakpoint-tablet) {
         grid-template-columns: 1fr 2fr 0.5fr;
         max-height: 64px;
         margin-bottom: 24px;
@@ -60,7 +60,7 @@
         }
     }
 
-    @media (max-width: variables.$breakpoint-tablet) {
+    @media (max-width: variables.$min-breakpoint-tablet) {
         display: grid;
         grid-template-columns: 3.5fr 8fr 1.5fr;
         max-height: 300px;
