@@ -18,3 +18,8 @@ export interface ProductDetailState {
   data: Product[];
   error: Error | null;
 }
+
+export enum UpdateProductOperation {
+  SUM = "sum",
+  SUBTRACT = "subtract",
+}
