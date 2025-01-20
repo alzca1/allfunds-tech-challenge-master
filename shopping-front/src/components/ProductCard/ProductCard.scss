@@ -116,6 +116,9 @@
     }
 
     @media (min-width: variables.$breakpoint-desktop) {
+        border: 1px solid red;
+        width: 16vw;
+        height: 30vh;
         .img-container {
             img {
                 height: 12vh;
