@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Product, UpdateProductOperation } from "../../types/global.types";
 import { truncateText } from "../../helpers/helpers";
+import FavoriteItem from "../FavoriteItem/FavoriteItem";
 
 interface ProductCardProps {
   itemDetails: Product;
@@ -12,7 +13,7 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ itemDetails, handleAddItemToCart }: ProductCardProps) {
-  const { image_url, stock, productName, price, productDescription } = itemDetails;
+  const { image_url, stock, productName, price, productDescription, favorite } = itemDetails;
 
   const [productUpdating, setProductUpdating] = useState(false);
 
@@ -31,6 +32,7 @@ export default function ProductCard({ itemDetails, handleAddItemToCart }: Produc
   return (
     <div className="product-card">
       <div className="img-container">
+        <FavoriteItem isFavorite={favorite == "1" ? true : false} />
         <img src={image_url} />
       </div>
       <div className="product-first-row">

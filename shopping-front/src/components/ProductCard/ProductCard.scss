@@ -7,11 +7,14 @@
     flex-direction: column;
     justify-content: space-between;
 
-    img {
-        width: 100%;
-        height: 10vh;
-        object-fit: cover;
-        border-radius: 8px 8px 0 0;
+    .img-container {
+        position: relative;
+        img {
+            width: 100%;
+            height: 10vh;
+            object-fit: cover;
+            border-radius: 8px 8px 0 0;
+        }
     }
 
     .product-first-row {
@@ -112,8 +115,10 @@
     }
 
     @media (min-width: variables.$breakpoint-desktop) {
-        img {
-            height: 12vh;
+        .img-container {
+            img {
+                height: 12vh;
+            }
         }
 
         .product-first-row {
