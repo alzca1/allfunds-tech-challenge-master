@@ -20,6 +20,15 @@
             transform: scale(0.7);
         }
     }
+
+    @media (min-width: variables.$min-breakpoint-tablet) and (max-width: variables.$max-breakpoint-tablet) {
+        top: 2px;
+        right: 2px;
+        .favorite-container,
+        .add-favorite-container {
+            transform: scale(0.8);
+        }
+    }
 }
 
 .favorite-item:active {
