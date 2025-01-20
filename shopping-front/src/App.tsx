@@ -1,4 +1,4 @@
-import { CartItem, Product, UpdateProductOperation } from "./types/global.types";
+import { CartItem, Product } from "./types/global.types";
 import ProductList from "./components/ProductList/ProductList";
 import { useEffect, useState } from "react";
 import { useViewPort } from "./hooks/useViewport";

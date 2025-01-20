@@ -1,4 +1,3 @@
-import React from "react";
 import { AddFavoriteIcon } from "../Icons/AddFavoriteIcon";
 import { FilledFavoriteIcon } from "../Icons/FilledFavoriteIcon";
 
