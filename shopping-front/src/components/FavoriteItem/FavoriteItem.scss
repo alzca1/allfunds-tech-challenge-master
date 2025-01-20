@@ -1,3 +1,5 @@
+@use "../../styles/variables" as variables;
+
 .favorite-item {
     position: absolute;
     top: 8px;
@@ -7,6 +9,15 @@
     .favorite-container {
         svg {
             color: red;
+        }
+    }
+
+    @media (max-width: variables.$min-breakpoint-tablet) {
+        top: 1px;
+        right: 1px;
+        .favorite-container,
+        .add-favorite-container {
+            transform: scale(0.7);
         }
     }
 }
