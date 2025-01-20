@@ -1,0 +1,70 @@
+@use "./styles/variables" as variables;
+
+.app {
+  height: 100vh;
+  .desktop {
+    display: grid;
+    grid-template-areas: "product-list cart";
+    grid-template-columns: 7fr 2fr;
+  }
+
+  .mobile {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+
+    .mobile-cart.not-visible {
+      display: none;
+    }
+
+    .mobile-cart.visible {
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: white;
+    }
+
+    .mobile-floating-button-container {
+      position: fixed;
+      display: flex;
+      justify-content: center;
+      bottom: 10px;
+      left: 0;
+      width: 100%;
+      z-index: 99;
+      padding: 0 32px;
+
+      button {
+        width: 100%;
+        height: 40px;
+        box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+
+  .favorites-toggler {
+    position: fixed;
+    font-size: 1.1rem;
+    font-weight: 600;
+    top: 5px;
+    left: 5px;
+    margin: 12px;
+    button {
+      padding: 12px 24px;
+      cursor: pointer;
+      border: none !important;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    }
+  }
+
+  @media (max-width: variables.$min-breakpoint-tablet) {
+    .favorites-toggler {
+      transform: scale(0.6);
+      padding: 0;
+      margin: 0;
+    }
+  }
+}

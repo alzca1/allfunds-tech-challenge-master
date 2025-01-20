@@ -1,0 +1,146 @@
+@use "../../styles/variables" as variables;
+
+.product-card {
+    border: 1px solid rgb(237, 221, 221);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .img-container {
+        position: relative;
+        img {
+            width: 100%;
+            height: 10vh;
+            object-fit: cover;
+            border-radius: 8px 8px 0 0;
+        }
+    }
+
+    .product-first-row {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        height: 4vh;
+        gap: 1rem;
+        padding: 4px;
+
+        h6,
+        span {
+            padding: 0;
+            line-height: 1;
+        }
+    }
+
+    .product-second-row {
+        height: 8vh;
+        padding: 0 8px;
+        // font-size: 0.7rem;
+
+        p {
+            line-height: 1;
+            padding: 0;
+            margin: 0;
+        }
+    }
+
+    .product-third-row {
+        padding: 8px 16px;
+        display: flex;
+        align-items: center;
+        button {
+            cursor: pointer;
+            border-radius: 0;
+            border: 1px solid black;
+            background-color: inherit;
+            padding: 4px 8px;
+        }
+    }
+
+    @media (max-width: variables.$min-breakpoint-tablet) {
+        width: 40vw;
+        height: 30vh;
+
+        .product-first-row {
+            span {
+                font-size: 0.7rem;
+            }
+        }
+
+        .product-second-row {
+            height: 10vh;
+            font-size: 0.7rem;
+            padding: 4px;
+        }
+        .product-third-row {
+            display: flex;
+            justify-content: center;
+            padding: 4px;
+            span {
+                display: none;
+            }
+
+            button {
+                width: 50%;
+                border-radius: 0;
+                font-size: 0.8rem;
+            }
+        }
+    }
+
+    @media (min-width: variables.$min-breakpoint-tablet) and (max-width: variables.$max-breakpoint-tablet) {
+        width: 16vw;
+        height: 30vh;
+
+        .product-first-row {
+            h6,
+            span {
+                font-size: 0.85rem;
+            }
+        }
+
+        .product-second-row {
+            height: 11vh;
+            font-size: 0.83rem;
+        }
+        .product-third-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+
+            button {
+                width: 60px;
+            }
+        }
+    }
+
+    @media (min-width: variables.$breakpoint-desktop) {
+        border: 1px solid red;
+        width: 16vw;
+        height: 30vh;
+        .img-container {
+            img {
+                height: 12vh;
+            }
+        }
+
+        .product-first-row {
+            h6 {
+                font-size: 1.1rem;
+            }
+            span {
+                font-size: 1rem;
+            }
+        }
+
+        .product-third-row {
+            display: flex;
+            justify-content: space-between;
+
+            button {
+                width: 80px;
+            }
+        }
+    }
+}

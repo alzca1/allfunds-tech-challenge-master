@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Shopping list Rest API",
   "scripts": {
-    "start": "json-server --watch db.json"
+    "start": "json-server --watch db.json --delay 1000"
   },
   "devDependencies": {
     "json-server": "^0.16.3"

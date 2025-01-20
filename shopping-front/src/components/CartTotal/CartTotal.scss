@@ -1,0 +1,26 @@
+@use "../../styles/variables";
+
+.cart-total {
+    // position: absolute;
+    display: flex;
+    gap: 8px;
+    margin: 8px 0;
+    padding: 8px 38px;
+    border: 1px solid grey;
+    left: 50%;
+    transform: translate(-50%, 0%);
+
+    @media (max-width: variables.$min-breakpoint-tablet) {
+        position: fixed;
+        width: 60%;
+        justify-content: center;
+        bottom: 0;
+        left: 50%;
+    }
+
+    @media (min-width: variables.$min-breakpoint-tablet) {
+        position: absolute;
+        top: 0;
+        left: 50%;
+    }
+}
