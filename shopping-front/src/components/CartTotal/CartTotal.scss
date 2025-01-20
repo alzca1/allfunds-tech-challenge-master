@@ -1,7 +1,7 @@
 @use "../../styles/variables";
 
 .cart-total {
-    position: absolute;
+    // position: absolute;
     display: flex;
     gap: 8px;
     margin: 8px 0;
@@ -11,11 +11,15 @@
     transform: translate(-50%, 0%);
 
     @media (max-width: variables.$min-breakpoint-tablet) {
+        position: fixed;
+        width: 60%;
+        justify-content: center;
         bottom: 0;
         left: 50%;
     }
 
     @media (min-width: variables.$min-breakpoint-tablet) {
+        position: absolute;
         top: 0;
         left: 50%;
     }

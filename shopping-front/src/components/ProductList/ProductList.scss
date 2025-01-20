@@ -1,5 +1,12 @@
 @use "../../styles/variables" as variables;
 
+.loading-message,
+.error-message {
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+}
+
 .product-list {
     grid-area: "product-list";
     display: grid;
@@ -10,6 +17,7 @@
         grid-template-columns: repeat(2, 1fr);
         margin: 0 auto;
         gap: 24px;
+        padding: 48px 0;
     }
 
     @media (min-width: variables.$min-breakpoint-tablet) {

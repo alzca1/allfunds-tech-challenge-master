@@ -11,8 +11,8 @@
             position: relative;
             align-items: center;
             justify-content: center;
-            margin-bottom: 32px;
             height: 5vh;
+            margin: 24px 8px 32px 8px;
             .back-button-container {
                 position: absolute;
                 top: 0;
@@ -21,7 +21,7 @@
         }
 
         .items-container {
-            padding: 16px;
+            padding: 24px;
         }
     }
     @media (min-width: variables.$min-breakpoint-tablet) {
