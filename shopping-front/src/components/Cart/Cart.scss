@@ -2,16 +2,17 @@
 
 .cart {
     position: relative;
-    border: 1px solid blue;
+    border: 1px solid grey;
     height: 100vh;
-    @media (max-width: variables.$breakpoint-tablet) {
+    overflow-y: scroll;
+    @media (max-width: variables.$min-breakpoint-tablet) {
         .cart-header-container {
             display: flex;
             position: relative;
             align-items: center;
             justify-content: center;
-            margin-bottom: 32px;
             height: 5vh;
+            margin: 24px 8px 32px 8px;
             .back-button-container {
                 position: absolute;
                 top: 0;
@@ -20,10 +21,10 @@
         }
 
         .items-container {
-            padding: 16px;
+            padding: 24px;
         }
     }
-    @media (min-width: variables.$breakpoint-tablet) {
+    @media (min-width: variables.$min-breakpoint-tablet) {
         padding: 80px 16px;
         .cart-header-container {
             display: none;

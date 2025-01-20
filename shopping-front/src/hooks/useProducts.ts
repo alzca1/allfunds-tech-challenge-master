@@ -118,5 +118,36 @@ export function useProducts() {
     }
   };
 
-  return { getProducts, productDetails, updateProductStock };
+  const updateProductFavorite = async (id: string, favValue: number | string): Promise<boolean> => {
+    try {
+      const response = await axios.patch(`${apiRoutes.updateProduct}/${id}`, {
+        favorite: favValue,
+      });
+
+      if (response.status == 200) {
+        const productDetailsCopy: Product[] = structuredClone(productDetails.data);
+        const updatedProductDetails: Product[] = productDetailsCopy.map((product) => {
+          if (product?.id == id) {
+            return {
+              ...product,
+              favorite: favValue,
+            };
+          }
+          return product;
+        });
+
+        setProductDetails((prevState) => ({
+          ...prevState,
+          data: updatedProductDetails,
+        }));
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  };
+
+  return { getProducts, productDetails, updateProductStock, updateProductFavorite };
 }

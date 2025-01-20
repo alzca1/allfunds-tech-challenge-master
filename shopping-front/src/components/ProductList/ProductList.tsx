@@ -5,22 +5,28 @@ import ProductCard from "../ProductCard/ProductCard";
 interface ProductListProps {
   isLoading: boolean;
   products: Product[];
-  handleUpdateCart: (cartItems: CartItem[]) => void;
-  updateProductStock: (
-    id: number | string,
-    operation: UpdateProductOperation,
-    amount: number
-  ) => Promise<boolean>;
+  productListActions: {
+    handleUpdateCart: (cartItems: CartItem[]) => void;
+    updateProductStock: (
+      id: number | string,
+      operation: UpdateProductOperation,
+      amount: number
+    ) => Promise<boolean>;
+    updateProductFavorite: (id: string, favValue: string | number) => Promise<boolean>;
+  };
   cartItems: CartItem[];
+  showFavorites: boolean;
 }
 
 export default function ProductList({
   isLoading,
   products,
-  handleUpdateCart,
-  updateProductStock,
+  productListActions,
   cartItems,
+  showFavorites,
 }: ProductListProps) {
+  const { handleUpdateCart, updateProductStock, updateProductFavorite } = productListActions;
+  const favorites = products.filter((product: Product) => product.favorite === "1");
   const handleAddItemToCart = async (
     itemDetails: Product,
     operation: UpdateProductOperation,
@@ -63,15 +69,15 @@ export default function ProductList({
 
   if (isLoading) {
     return (
-      <div>
-        <h3>Loading products...</h3>
+      <div className="loading-message">
+        <h2>Loading products...</h2>
       </div>
     );
   }
   if (products?.length < 1 && !isLoading) {
     return (
-      <div className="product-list">
-        <h3>No products found :(</h3>
+      <div className="error-message">
+        <h2>No products found :(</h2>
       </div>
     );
   }
@@ -79,13 +85,23 @@ export default function ProductList({
   if (products?.length > 0) {
     return (
       <div className="product-list">
-        {products.map((product: Product) => (
-          <ProductCard
-            key={product?.id}
-            itemDetails={product}
-            handleAddItemToCart={handleAddItemToCart}
-          />
-        ))}
+        {showFavorites
+          ? favorites.map((product: Product) => (
+              <ProductCard
+                key={product?.id}
+                itemDetails={product}
+                handleAddItemToCart={handleAddItemToCart}
+                updateProductFavorite={updateProductFavorite}
+              />
+            ))
+          : products.map((product: Product) => (
+              <ProductCard
+                key={product?.id}
+                itemDetails={product}
+                handleAddItemToCart={handleAddItemToCart}
+                updateProductFavorite={updateProductFavorite}
+              />
+            ))}
       </div>
     );
   }

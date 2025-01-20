@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Product, UpdateProductOperation } from "../../types/global.types";
 import { truncateText } from "../../helpers/helpers";
+import FavoriteItem from "../FavoriteItem/FavoriteItem";
 
 interface ProductCardProps {
   itemDetails: Product;
@@ -9,10 +10,15 @@ interface ProductCardProps {
     operation: UpdateProductOperation,
     amount: number
   ) => Promise<void>;
+  updateProductFavorite: (id: string, favValue: string | number) => Promise<boolean>;
 }
 
-export default function ProductCard({ itemDetails, handleAddItemToCart }: ProductCardProps) {
-  const { image_url, stock, productName, price, productDescription } = itemDetails;
+export default function ProductCard({
+  itemDetails,
+  handleAddItemToCart,
+  updateProductFavorite,
+}: ProductCardProps) {
+  const { id, image_url, stock, productName, price, productDescription, favorite } = itemDetails;
 
   const [productUpdating, setProductUpdating] = useState(false);
 
@@ -24,6 +30,11 @@ export default function ProductCard({ itemDetails, handleAddItemToCart }: Produc
     handleAddItemToCart(itemDetails, UpdateProductOperation.SUBTRACT, 1);
   };
 
+  const toggleProductFavorite = (): void => {
+    const newFavoriteValue = favorite === 0 ? "1" : 0;
+    updateProductFavorite(id, newFavoriteValue);
+  };
+
   useEffect(() => {
     setProductUpdating(false);
   }, [itemDetails]);
@@ -31,11 +42,15 @@ export default function ProductCard({ itemDetails, handleAddItemToCart }: Produc
   return (
     <div className="product-card">
       <div className="img-container">
+        <FavoriteItem
+          toggleProductFavorite={toggleProductFavorite}
+          isFavorite={favorite == "1" ? true : false}
+        />
         <img src={image_url} />
       </div>
       <div className="product-first-row">
         <h6>{truncateText(productName, 19)}</h6>
-        <span>{price}</span>
+        <span>{price}€</span>
       </div>
       <div className="product-second-row">
         <p>{truncateText(productDescription, 130)}</p>

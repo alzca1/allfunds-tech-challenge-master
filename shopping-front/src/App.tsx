@@ -10,8 +10,12 @@ function App() {
 
   const [isCheckoutVisible, setIsCheckoutVisible] = useState<boolean>(false);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [showFavorites, setShowFavorites] = useState<boolean>(false);
 
-  const { getProducts, productDetails, updateProductStock } = useProducts();
+  const { getProducts, productDetails, updateProductStock, updateProductFavorite } = useProducts();
+  const favoriteProducts = productDetails?.data?.filter(
+    (product: Product) => product.favorite === "1"
+  );
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -21,42 +25,30 @@ function App() {
     fetchProducts();
   }, []);
 
+  const handleToggleFavorites = () => {
+    setShowFavorites((prevState) => !prevState);
+  };
+
   const handleToggleCart = (): void => {
     setIsCheckoutVisible((prevState) => !prevState);
+    if (showFavorites) {
+      setShowFavorites(false);
+    }
+
+    if (!showFavorites && favoriteProducts?.length > 0) {
+      setShowFavorites(true);
+    }
   };
 
   const handleUpdateCart = (cartItems: CartItem[]) => {
     setCartItems(cartItems);
   };
-  //   const update = await updateProductStock(id, UpdateProductOperation.SUBTRACT, 1);
-  //   const hasItemQuantityLeft = cartItems.some(
-  //     (cartItem: CartItem) => cartItem?.id == id && cartItem?.quantity - 1 > 0
-  //   );
-  //   const cartItemsCopy: CartItem[] = structuredClone(cartItems);
 
-  //   if (update && hasItemQuantityLeft) {
-  //     const updatedCartItems: CartItem[] = cartItemsCopy?.map((cartItem: CartItem) => {
-  //       if (cartItem?.id === id) {
-  //         const currentQuantity = cartItem?.quantity;
-  //         return {
-  //           ...cartItem,
-  //           quantity: currentQuantity - 1,
-  //         };
-  //       }
-  //       return cartItem;
-  //     });
-  //     setCartItems(updatedCartItems);
-  //     return;
-  //   }
-  //   if (update && !hasItemQuantityLeft) {
-  //     const updatedCartItems: CartItem[] = cartItemsCopy?.filter(
-  //       (cartItem: CartItem) => cartItem?.id !== id
-  //     );
-
-  //     setCartItems(updatedCartItems);
-  //     return;
-  //   }
-  // };
+  const productListActions = {
+    handleUpdateCart: handleUpdateCart,
+    updateProductStock: updateProductStock,
+    updateProductFavorite: updateProductFavorite,
+  };
 
   return (
     <div className="app">
@@ -65,8 +57,8 @@ function App() {
           <ProductList
             isLoading={productDetails?.isLoading}
             products={productDetails?.data}
-            handleUpdateCart={handleUpdateCart}
-            updateProductStock={updateProductStock}
+            productListActions={productListActions}
+            showFavorites={showFavorites}
             cartItems={cartItems}
           />
           <div
@@ -79,20 +71,20 @@ function App() {
               handleToggleCart={handleToggleCart}
             />
           </div>
-          {isCheckoutVisible ? null : (
+          {!isCheckoutVisible && cartItems?.length > 0 ? (
             <div className="mobile-floating-button-container">
               <button onClick={handleToggleCart}> Go to Checkout</button>
             </div>
-          )}
+          ) : null}
         </div>
       ) : (
         <div className="desktop">
           <ProductList
             isLoading={productDetails?.isLoading}
             products={productDetails?.data}
-            handleUpdateCart={handleUpdateCart}
-            updateProductStock={updateProductStock}
+            productListActions={productListActions}
             cartItems={cartItems}
+            showFavorites={showFavorites}
           />
           <Cart
             cartItems={cartItems}
@@ -101,6 +93,12 @@ function App() {
           />
         </div>
       )}
+
+      {favoriteProducts?.length > 0 && !isCheckoutVisible ? (
+        <div className="favorites-toggler">
+          <button onClick={handleToggleFavorites}>♥️ Wishlist ({favoriteProducts?.length})</button>
+        </div>
+      ) : null}
     </div>
   );
 }

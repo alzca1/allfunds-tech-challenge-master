@@ -1,16 +1,26 @@
 @use "../../styles/variables" as variables;
 
+.loading-message,
+.error-message {
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+}
+
 .product-list {
     grid-area: "product-list";
     display: grid;
+    height: 100vh;
+    overflow-y: scroll;
 
-    @media (max-width: variables.$breakpoint-tablet) {
+    @media (max-width: variables.$min-breakpoint-tablet) {
         grid-template-columns: repeat(2, 1fr);
         margin: 0 auto;
         gap: 24px;
+        padding: 48px 0;
     }
 
-    @media (min-width: variables.$breakpoint-tablet) {
+    @media (min-width: variables.$min-breakpoint-tablet) {
         grid-template-columns: repeat(4, 1fr);
         gap: 32px;
         padding: 48px 8px 48px 16px;
