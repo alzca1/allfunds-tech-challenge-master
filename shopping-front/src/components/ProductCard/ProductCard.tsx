@@ -31,7 +31,6 @@ export default function ProductCard({
   };
 
   const toggleProductFavorite = (): void => {
-    debugger;
     const newFavoriteValue = favorite === 0 ? "1" : 0;
     updateProductFavorite(id, newFavoriteValue);
   };

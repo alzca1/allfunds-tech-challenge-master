@@ -2,10 +2,16 @@
     position: absolute;
     top: 8px;
     right: 8px;
+    cursor: pointer;
 
     .favorite-container {
         svg {
             color: red;
         }
     }
+}
+
+.favorite-item:active {
+    color: red;
+    transform: scale(1.2);
 }
