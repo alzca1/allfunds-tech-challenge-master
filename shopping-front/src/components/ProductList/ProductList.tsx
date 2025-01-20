@@ -63,15 +63,15 @@ export default function ProductList({
 
   if (isLoading) {
     return (
-      <div>
-        <h3>Loading products...</h3>
+      <div className="loading-message">
+        <h2>Loading products...</h2>
       </div>
     );
   }
   if (products?.length < 1 && !isLoading) {
     return (
-      <div className="product-list">
-        <h3>No products found :(</h3>
+      <div className="error-message">
+        <h2>No products found :(</h2>
       </div>
     );
   }
