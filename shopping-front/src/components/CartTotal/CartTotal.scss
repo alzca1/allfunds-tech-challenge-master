@@ -11,7 +11,7 @@
     transform: translate(-50%, 0%);
 
     @media (max-width: variables.$min-breakpoint-tablet) {
-        position: relative;
+        position: fixed;
         width: 60%;
         justify-content: center;
         bottom: 0;
