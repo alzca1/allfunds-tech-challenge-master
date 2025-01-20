@@ -2,6 +2,7 @@ import React from "react";
 import CartItem from "../CartItem/CartItem";
 import { CartItem as CartItemInterface, UpdateProductOperation } from "../../types/global.types";
 import CartTotal from "../CartTotal/CartTotal";
+import { LeftArrowIcon } from "../Icons/LeftArrowIcon";
 
 interface CartProps {
   cartItems: CartItemInterface[] | [];
@@ -81,7 +82,9 @@ export default function Cart({
     <div className="cart">
       <div className="cart-header-container">
         <div className="back-button-container">
-          <button onClick={handleToggleCart}>back</button>
+          <button onClick={handleToggleCart}>
+            <LeftArrowIcon />
+          </button>
         </div>
         <h3>Cart</h3>
       </div>
