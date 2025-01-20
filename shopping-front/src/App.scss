@@ -1,10 +1,7 @@
 @use "./styles/variables" as variables;
 
 .app {
-  // display: grid;
-  // grid-template-areas: "product-list cart";
   height: 100vh;
-  padding: 16px;
   .desktop {
     display: grid;
     grid-template-areas: "product-list cart";

@@ -79,11 +79,11 @@ function App() {
               handleToggleCart={handleToggleCart}
             />
           </div>
-          {isCheckoutVisible ? null : (
+          {!isCheckoutVisible && cartItems?.length > 0 ? (
             <div className="mobile-floating-button-container">
               <button onClick={handleToggleCart}> Go to Checkout</button>
             </div>
-          )}
+          ) : null}
         </div>
       ) : (
         <div className="desktop">

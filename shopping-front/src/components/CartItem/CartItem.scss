@@ -4,11 +4,22 @@
     display: grid;
     margin-bottom: 24px;
 
+    img {
+        border-radius: 8px;
+    }
+
     .action-container {
         display: flex;
         flex-direction: column;
         justify-content: end;
         padding: 4px;
+
+        .item-quantity-container {
+            button {
+                border: none;
+                background-color: inherit;
+            }
+        }
     }
 
     .price-container {
@@ -17,7 +28,39 @@
         align-items: center;
     }
 
-    @media (min-width: variables.$breakpoint-tablet) {
+    @media (max-width: variables.$min-breakpoint-tablet) {
+        display: grid;
+        grid-template-columns: 3.5fr 8fr 1.5fr;
+        max-height: 300px;
+        margin-bottom: 24px;
+
+        img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+        }
+
+        .action-container {
+            padding: 4px;
+            align-items: center;
+            .item-quantity-container {
+                padding: 8px 16px 0 16px;
+                text-align: left;
+                span {
+                    font-size: 1.2rem;
+                    margin: 0 16px;
+                }
+            }
+        }
+
+        .price-container {
+            span {
+                font-size: 1.1rem;
+            }
+        }
+    }
+
+    @media (min-width: variables.$min-breakpoint-tablet) and (max-width: variables.$max-breakpoint-tablet) {
         grid-template-columns: 1fr 2fr 0.5fr;
         max-height: 64px;
         margin-bottom: 24px;
@@ -60,34 +103,20 @@
         }
     }
 
-    @media (max-width: variables.$breakpoint-tablet) {
-        display: grid;
-        grid-template-columns: 3.5fr 8fr 1.5fr;
-        max-height: 300px;
-        margin-bottom: 24px;
-
-        img {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-        }
+    @media (min-width: variables.$breakpoint-desktop) {
+        grid-template-columns: 1fr 2fr 0.5fr;
 
         .action-container {
-            padding: 4px;
-
-            .item-quantity-container {
-                padding: 8px 16px 0 16px;
-                text-align: left;
-                span {
-                    font-size: 1.2rem;
-                    margin: 0 16px;
-                }
-            }
+            align-items: center;
+            padding: 0 0 24px 0;
         }
 
-        .price-container {
+        .item-quantity-container {
+            padding: 8px 16px 0 16px;
+            text-align: left;
             span {
-                font-size: 1.1rem;
+                font-size: 1.2rem;
+                margin: 0 16px;
             }
         }
     }

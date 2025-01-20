@@ -35,7 +35,7 @@ export default function ProductCard({ itemDetails, handleAddItemToCart }: Produc
       </div>
       <div className="product-first-row">
         <h6>{truncateText(productName, 19)}</h6>
-        <span>{price}</span>
+        <span>{price}€</span>
       </div>
       <div className="product-second-row">
         <p>{truncateText(productDescription, 130)}</p>
