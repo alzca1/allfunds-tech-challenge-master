@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Product, UpdateProductOperation } from "../../types/global.types";
 import { truncateText } from "../../helpers/helpers";
 import FavoriteItem from "../FavoriteItem/FavoriteItem";

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { CartItem as CartItemInterface } from "../../types/global.types";
 
 interface CartItemProps {

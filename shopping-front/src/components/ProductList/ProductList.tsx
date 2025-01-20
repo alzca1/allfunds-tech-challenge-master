@@ -1,4 +1,3 @@
-import React from "react";
 import { CartItem, Product, UpdateProductOperation } from "../../types/global.types";
 import ProductCard from "../ProductCard/ProductCard";
 
