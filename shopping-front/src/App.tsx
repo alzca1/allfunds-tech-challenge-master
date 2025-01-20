@@ -11,7 +11,7 @@ function App() {
   const [isCheckoutVisible, setIsCheckoutVisible] = useState<boolean>(false);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
-  const { getProducts, productDetails, updateProductStock } = useProducts();
+  const { getProducts, productDetails, updateProductStock, updateProductFavorite } = useProducts();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -29,6 +29,12 @@ function App() {
     setCartItems(cartItems);
   };
 
+  const productListActions = {
+    handleUpdateCart: handleUpdateCart,
+    updateProductStock: updateProductStock,
+    updateProductFavorite: updateProductFavorite,
+  };
+
   return (
     <div className="app">
       {isMobile ? (
@@ -36,8 +42,10 @@ function App() {
           <ProductList
             isLoading={productDetails?.isLoading}
             products={productDetails?.data}
-            handleUpdateCart={handleUpdateCart}
-            updateProductStock={updateProductStock}
+            productListActions={productListActions}
+            // handleUpdateCart={handleUpdateCart}
+            // updateProductStock={updateProductStock}
+            // updateProductFavorite={updateProductFavorite}
             cartItems={cartItems}
           />
           <div
@@ -61,8 +69,10 @@ function App() {
           <ProductList
             isLoading={productDetails?.isLoading}
             products={productDetails?.data}
-            handleUpdateCart={handleUpdateCart}
-            updateProductStock={updateProductStock}
+            productListActions={productListActions}
+            // handleUpdateCart={handleUpdateCart}
+            // updateProductStock={updateProductStock}
+            // updateProductFavorite={updateProductFavorite}
             cartItems={cartItems}
           />
           <Cart

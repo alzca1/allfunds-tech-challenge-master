@@ -5,22 +5,25 @@ import ProductCard from "../ProductCard/ProductCard";
 interface ProductListProps {
   isLoading: boolean;
   products: Product[];
-  handleUpdateCart: (cartItems: CartItem[]) => void;
-  updateProductStock: (
-    id: number | string,
-    operation: UpdateProductOperation,
-    amount: number
-  ) => Promise<boolean>;
+  productListActions: {
+    handleUpdateCart: (cartItems: CartItem[]) => void;
+    updateProductStock: (
+      id: number | string,
+      operation: UpdateProductOperation,
+      amount: number
+    ) => Promise<boolean>;
+    updateProductFavorite: (id: string, favValue: string | number) => Promise<boolean>;
+  };
   cartItems: CartItem[];
 }
 
 export default function ProductList({
   isLoading,
   products,
-  handleUpdateCart,
-  updateProductStock,
+  productListActions,
   cartItems,
 }: ProductListProps) {
+  const { handleUpdateCart, updateProductStock, updateProductFavorite } = productListActions;
   const handleAddItemToCart = async (
     itemDetails: Product,
     operation: UpdateProductOperation,
@@ -84,6 +87,7 @@ export default function ProductList({
             key={product?.id}
             itemDetails={product}
             handleAddItemToCart={handleAddItemToCart}
+            updateProductFavorite={updateProductFavorite}
           />
         ))}
       </div>
