@@ -10,8 +10,12 @@ function App() {
 
   const [isCheckoutVisible, setIsCheckoutVisible] = useState<boolean>(false);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [showFavorites, setShowFavorites] = useState<boolean>(false);
 
   const { getProducts, productDetails, updateProductStock, updateProductFavorite } = useProducts();
+  const favoriteProducts = productDetails?.data?.filter(
+    (product: Product) => product.favorite === "1"
+  );
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -21,8 +25,19 @@ function App() {
     fetchProducts();
   }, []);
 
+  const handleToggleFavorites = () => {
+    setShowFavorites((prevState) => !prevState);
+  };
+
   const handleToggleCart = (): void => {
     setIsCheckoutVisible((prevState) => !prevState);
+    if (showFavorites) {
+      setShowFavorites(false);
+    }
+
+    if (!showFavorites && favoriteProducts?.length > 0) {
+      setShowFavorites(true);
+    }
   };
 
   const handleUpdateCart = (cartItems: CartItem[]) => {
@@ -43,9 +58,7 @@ function App() {
             isLoading={productDetails?.isLoading}
             products={productDetails?.data}
             productListActions={productListActions}
-            // handleUpdateCart={handleUpdateCart}
-            // updateProductStock={updateProductStock}
-            // updateProductFavorite={updateProductFavorite}
+            showFavorites={showFavorites}
             cartItems={cartItems}
           />
           <div
@@ -70,10 +83,8 @@ function App() {
             isLoading={productDetails?.isLoading}
             products={productDetails?.data}
             productListActions={productListActions}
-            // handleUpdateCart={handleUpdateCart}
-            // updateProductStock={updateProductStock}
-            // updateProductFavorite={updateProductFavorite}
             cartItems={cartItems}
+            showFavorites={showFavorites}
           />
           <Cart
             cartItems={cartItems}
@@ -82,6 +93,12 @@ function App() {
           />
         </div>
       )}
+
+      {favoriteProducts?.length > 0 && !isCheckoutVisible ? (
+        <div className="favorites-toggler">
+          <button onClick={handleToggleFavorites}>♥️ Wishlist ({favoriteProducts?.length})</button>
+        </div>
+      ) : null}
     </div>
   );
 }

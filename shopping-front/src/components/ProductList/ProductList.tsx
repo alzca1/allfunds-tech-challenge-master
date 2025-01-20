@@ -15,6 +15,7 @@ interface ProductListProps {
     updateProductFavorite: (id: string, favValue: string | number) => Promise<boolean>;
   };
   cartItems: CartItem[];
+  showFavorites: boolean;
 }
 
 export default function ProductList({
@@ -22,8 +23,10 @@ export default function ProductList({
   products,
   productListActions,
   cartItems,
+  showFavorites,
 }: ProductListProps) {
   const { handleUpdateCart, updateProductStock, updateProductFavorite } = productListActions;
+  const favorites = products.filter((product: Product) => product.favorite === "1");
   const handleAddItemToCart = async (
     itemDetails: Product,
     operation: UpdateProductOperation,
@@ -82,14 +85,23 @@ export default function ProductList({
   if (products?.length > 0) {
     return (
       <div className="product-list">
-        {products.map((product: Product) => (
-          <ProductCard
-            key={product?.id}
-            itemDetails={product}
-            handleAddItemToCart={handleAddItemToCart}
-            updateProductFavorite={updateProductFavorite}
-          />
-        ))}
+        {showFavorites
+          ? favorites.map((product: Product) => (
+              <ProductCard
+                key={product?.id}
+                itemDetails={product}
+                handleAddItemToCart={handleAddItemToCart}
+                updateProductFavorite={updateProductFavorite}
+              />
+            ))
+          : products.map((product: Product) => (
+              <ProductCard
+                key={product?.id}
+                itemDetails={product}
+                handleAddItemToCart={handleAddItemToCart}
+                updateProductFavorite={updateProductFavorite}
+              />
+            ))}
       </div>
     );
   }

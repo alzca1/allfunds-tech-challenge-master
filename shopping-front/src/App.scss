@@ -42,4 +42,29 @@
       }
     }
   }
+
+  .favorites-toggler {
+    position: fixed;
+    font-size: 1.1rem;
+    font-weight: 600;
+    top: 5px;
+    left: 5px;
+    margin: 12px;
+    button {
+      padding: 12px 24px;
+      cursor: pointer;
+      border: none !important;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    }
+  }
+
+  @media (max-width: variables.$min-breakpoint-tablet) {
+    .favorites-toggler {
+      transform: scale(0.6);
+      padding: 0;
+      margin: 0;
+    }
+  }
 }
