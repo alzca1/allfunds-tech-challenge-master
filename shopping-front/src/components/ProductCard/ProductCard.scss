@@ -7,11 +7,14 @@
     flex-direction: column;
     justify-content: space-between;
 
-    img {
-        width: 100%;
-        height: 10vh;
-        object-fit: cover;
-        border-radius: 8px 8px 0 0;
+    .img-container {
+        position: relative;
+        img {
+            width: 100%;
+            height: 10vh;
+            object-fit: cover;
+            border-radius: 8px 8px 0 0;
+        }
     }
 
     .product-first-row {
@@ -46,6 +49,7 @@
         display: flex;
         align-items: center;
         button {
+            cursor: pointer;
             border-radius: 0;
             border: 1px solid black;
             background-color: inherit;
@@ -112,8 +116,13 @@
     }
 
     @media (min-width: variables.$breakpoint-desktop) {
-        img {
-            height: 12vh;
+        border: 1px solid red;
+        width: 16vw;
+        height: 30vh;
+        .img-container {
+            img {
+                height: 12vh;
+            }
         }
 
         .product-first-row {
