@@ -1,10 +1,12 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, it, beforeEach, vi, expect } from "vitest";
+import "@testing-library/jest-dom";
 import ProductCard from "../src/components/ProductCard/ProductCard";
 import { Product, UpdateProductOperation } from "../src/types/global.types";
 
 const mockHandleAddItemToCart = vi.fn();
+const updateProductFavorite = vi.fn();
 
 const mockProduct: Product = {
   id: "41fd4fd9-95c7-4809-96db-a147d352fdbb",
@@ -22,10 +24,16 @@ describe("ProductCard Component", () => {
   });
 
   it("renders product details correctly", () => {
-    render(<ProductCard itemDetails={mockProduct} handleAddItemToCart={mockHandleAddItemToCart} />);
+    render(
+      <ProductCard
+        itemDetails={mockProduct}
+        handleAddItemToCart={mockHandleAddItemToCart}
+        updateProductFavorite={updateProductFavorite}
+      />
+    );
 
     expect(screen.getByText("Unbranded Metal")).toBeInTheDocument();
-    expect(screen.getByText("43")).toBeInTheDocument();
+    expect(screen.getByText(/43/)).toBeInTheDocument();
     expect(screen.getByText("8 left")).toBeInTheDocument();
     expect(screen.getByText("Porro tempore autem.")).toBeInTheDocument();
 
@@ -38,6 +46,7 @@ describe("ProductCard Component", () => {
       <ProductCard
         itemDetails={{ ...mockProduct, stock: 0 }}
         handleAddItemToCart={mockHandleAddItemToCart}
+        updateProductFavorite={updateProductFavorite}
       />
     );
 
@@ -46,7 +55,13 @@ describe("ProductCard Component", () => {
   });
 
   it("calls handleAddItemToCart when the button is clicked", async () => {
-    render(<ProductCard itemDetails={mockProduct} handleAddItemToCart={mockHandleAddItemToCart} />);
+    render(
+      <ProductCard
+        itemDetails={mockProduct}
+        handleAddItemToCart={mockHandleAddItemToCart}
+        updateProductFavorite={updateProductFavorite}
+      />
+    );
 
     const button = screen.getByRole("button", { name: "+add" });
     fireEvent.click(button);
@@ -61,7 +76,13 @@ describe("ProductCard Component", () => {
   });
 
   it("shows 'updating' when productUpdating is true", async () => {
-    render(<ProductCard itemDetails={mockProduct} handleAddItemToCart={mockHandleAddItemToCart} />);
+    render(
+      <ProductCard
+        itemDetails={mockProduct}
+        handleAddItemToCart={mockHandleAddItemToCart}
+        updateProductFavorite={updateProductFavorite}
+      />
+    );
 
     const button = screen.getByRole("button", { name: "+add" });
 
@@ -72,7 +93,11 @@ describe("ProductCard Component", () => {
 
   it("updates product details when itemDetails change", () => {
     const { rerender } = render(
-      <ProductCard itemDetails={mockProduct} handleAddItemToCart={mockHandleAddItemToCart} />
+      <ProductCard
+        itemDetails={mockProduct}
+        handleAddItemToCart={mockHandleAddItemToCart}
+        updateProductFavorite={updateProductFavorite}
+      />
     );
 
     expect(screen.getByText("Unbranded Metal")).toBeInTheDocument();
@@ -80,7 +105,11 @@ describe("ProductCard Component", () => {
 
     const updatedProduct = { ...mockProduct, stock: 10, productName: "Updated Product" };
     rerender(
-      <ProductCard itemDetails={updatedProduct} handleAddItemToCart={mockHandleAddItemToCart} />
+      <ProductCard
+        itemDetails={updatedProduct}
+        handleAddItemToCart={mockHandleAddItemToCart}
+        updateProductFavorite={updateProductFavorite}
+      />
     );
 
     expect(screen.getByText("Updated Product")).toBeInTheDocument();
